@@ -3,12 +3,15 @@
 
     <form method="post" wire:submit.prevent="create">
 
-        <input type="text" name="message" id="message" wire:model="message">
+        <input type="text" name="content" id="content" wire:model="content">
+        @error('content')
+        {{ $message }}
+        @enderror
         <button type="submit">Criar comentario</button>
 
     </form>
 
-    <h1>{{ $message }}</h1>
+    <h1>{{ $content }}</h1>
 
     <hr>
     @if ($tweets->count() > 0)
