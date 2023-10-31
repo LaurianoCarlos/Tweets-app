@@ -21,4 +21,10 @@
     @else
         <p>Nenhum tweet encontrado.</p>
     @endif
+
+    <hr>
+
+    <div>
+        {{ $tweets->links() }}
+    </div>
 </div>
