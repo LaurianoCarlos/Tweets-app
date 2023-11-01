@@ -10,7 +10,7 @@ class ShowTweets extends Component
 {
 
     use WithPagination;
-    
+
     public $content;
     public $rules = [
         'content' => 'required|min:3|max:255',
@@ -29,9 +29,10 @@ class ShowTweets extends Component
     {
         $this->validate();
 
-        Tweet::create([
-            'content' => $this->content,
-            'user_id' => $this->userDefalut
-        ]);
+        auth()->user()->tweets()->create(
+            [
+                'content' => $this->content,
+            ]
+        );
     }
 }

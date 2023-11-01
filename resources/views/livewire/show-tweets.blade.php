@@ -1,3 +1,4 @@
+
 <div>
     <p>ShowTweets</p>
 
@@ -8,11 +9,9 @@
         {{ $message }}
         @enderror
         <button type="submit">Criar comentario</button>
-
     </form>
 
     <h1>{{ $content }}</h1>
-
     <hr>
     @if ($tweets->count() > 0)
         @foreach($tweets as $tweet)
