@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Like;
 use App\Models\Tweet;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,7 +21,7 @@ class ShowTweets extends Component
 
     public function render()
     {
-        $tweets = Tweet::with('user')->paginate(2);
+        $tweets = Tweet::with('user')->paginate(10);
 
         return view('livewire.show-tweets', [
             'tweets' => $tweets,
@@ -35,4 +37,19 @@ class ShowTweets extends Component
             ]
         );
     }
+    public function like($idTweet)
+    {
+        $tweet = Tweet::find($idTweet);
+
+        $like = new Like([
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $tweet->likes()->save($like);
+    }
+    public function unlike(Tweet $tweet)
+    {
+        $tweet->likes()->delete();
+    }
+
 }

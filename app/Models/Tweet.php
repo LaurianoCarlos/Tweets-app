@@ -23,6 +23,11 @@ class Tweet extends Model
     }
     public  function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class)
+            ->where(function ($query){
+                if(auth()->check()){
+                    $query->where('user_id', auth()->user()->id);
+                }
+            });
     }
 }
